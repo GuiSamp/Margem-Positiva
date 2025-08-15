@@ -1,0 +1,14 @@
+<div class="bg-black/20 rounded-lg overflow-hidden border-b-2 border-transparent focus-within:border-[#4a90e2] transition-colors duration-300">
+  
+  <label [for]="id" class="flex items-center p-3 space-x-3">
+    
+    <ng-content select="[icon]"></ng-content>
+    
+    <input 
+      [type]="type" 
+      [id]="id" 
+      [placeholder]="placeholder"
+      class="bg-transparent w-full focus:outline-none placeholder-white/80 text-sm tracking-wider">
+      
+  </label>
+</div>
