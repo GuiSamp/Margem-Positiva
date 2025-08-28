@@ -1,1 +1,65 @@
-<p>login-page works!</p>
+<!-- Contêiner principal que ocupa toda a tela com o gradiente de fundo -->
+<div>
+  <app-plano-de-fundo></app-plano-de-fundo>
+  <!-- Wrapper para o conteúdo principal, garantindo o espaçamento e centralização -->
+  <main class="w-full p-6 max-w-sm mx-auto flex flex-col h-full z-10">
+    <!-- Seção do Formulário -->
+    <div class="flex-grow flex flex-col justify-center">
+      <!-- Textos de boas-vindas -->
+      <div class="mb-6">
+        <h1 class="text-3xl font-bold text-white">BEM-VINDO</h1>
+        <p class="text-white/80 mt-1">Insira suas informações de acesso!</p>
+      </div>
+
+      <!-- Formulário -->
+      <form class="flex flex-col space-y-2">
+        <div class="flex flex-col space-y-4">
+          <app-input-base
+            [type]="'string'"
+            [id]="'email'"
+            [name]="'email'"
+            [placeholder]="'E-MAIL'"
+            [pathIcon]="'/mail-icon.png'"
+          ></app-input-base>
+          <app-input-base
+            [type]="'string'"
+            [id]="'senha'"
+            [name]="'senha'"
+            [placeholder]="'SENHA'"
+            [pathIcon]="'/lock-icon.png'"
+          ></app-input-base>
+        </div>
+
+        <!-- Link "Esqueceu a senha?" -->
+        <div>
+          <a
+            href="#"
+            class="text-sm font-semibold underline text-[#97C7FF] hover:text-white transition-colors"
+            >Esqueceu a senha?</a
+          >
+        </div>
+
+        <app-botao-primario [name]="'REALIZAR LOGIN'"></app-botao-primario>
+
+        <!-- Separador "ou" -->
+        <div
+          class="flex flex-row align-middle items-center justify-center gap-4"
+        >
+          <div class="border w-full border-b-[1.5px] border-white"></div>
+          <span class="font-semibold text-sm text-white">ou</span>
+          <div class="border w-full border-b-[1.5px] border-white"></div>
+        </div>
+
+        <app-botao-google></app-botao-google>
+      </form>
+    </div>
+
+    <!-- Rodapé com link de registro -->
+    <footer class="flex-shrink-0 py-4 text-center">
+      <p class="text-xs text-white/80">
+        Não tem uma conta?
+        <a href="#" class="font-bold text-white hover:underline">Registre-se</a>
+      </p>
+    </footer>
+  </main>
+</div>
