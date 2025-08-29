@@ -4,7 +4,7 @@ import { PlanoDeFundo } from './components/plano-de-fundo/plano-de-fundo';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, PlanoDeFundo],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

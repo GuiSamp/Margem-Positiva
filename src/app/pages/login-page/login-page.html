@@ -1,18 +1,16 @@
-<!-- Contêiner principal que ocupa toda a tela com o gradiente de fundo -->
 <div>
-  <app-plano-de-fundo></app-plano-de-fundo>
-  <!-- Wrapper para o conteúdo principal, garantindo o espaçamento e centralização -->
-  <main class="w-full p-6 max-w-sm mx-auto flex flex-col h-full z-10">
-    <!-- Seção do Formulário -->
-    <div class="flex-grow flex flex-col justify-center">
-      <!-- Textos de boas-vindas -->
+<app-plano-de-fundo>
+       <div class="top-6 inset-x-0 flex justify-center -z-10">
+    <img src="/logo-icon.png" class="w-40 h-40" alt="Logo" />
+  </div>
+    <main class="flex flex-col  py-12 bg-[linear-gradient(180deg,rgba(7,40,78,1)_0%,rgba(7,40,78,0.6)_33%,rgba(7,40,78,0.2)_66%,rgba(43,89,142,0)_100%)]  bottom-0 rounded-tr-[100px] w-full h-[80%] -z-10">
+    <div class="flex-grow px-12 flex flex-col justify-center">
       <div class="mb-6">
         <h1 class="text-3xl font-bold text-white">BEM-VINDO</h1>
         <p class="text-white/80 mt-1">Insira suas informações de acesso!</p>
       </div>
 
-      <!-- Formulário -->
-      <form class="flex flex-col space-y-2">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col space-y-2">
         <div class="flex flex-col space-y-4">
           <app-input-base
             [type]="'string'"
@@ -20,30 +18,52 @@
             [name]="'email'"
             [placeholder]="'E-MAIL'"
             [pathIcon]="'/mail-icon.png'"
+            [control]="getControl('email')"
           ></app-input-base>
+
+          @if (getControl('email').touched && getControl('email').invalid) {
+            <div class="text-red-500 text-sm -mt-2"> @if (getControl('email').errors?.['required']) {
+                <small>O e-mail é obrigatório.</small>
+              }
+              @if (getControl('email').errors?.['email']) {
+                <small>Digite um e-mail válido.</small>
+              }
+            </div>
+          }
+
           <app-input-base
-            [type]="'string'"
+            [type]="'password'"
             [id]="'senha'"
             [name]="'senha'"
             [placeholder]="'SENHA'"
             [pathIcon]="'/lock-icon.png'"
+            [control]="getControl('senha')"
           ></app-input-base>
+
+          @if (getControl('senha').touched && getControl('senha').invalid) {
+            <div class="text-red-500 text-sm -mt-2">
+              @if (getControl('senha').errors?.['required']) {
+                <small>A senha é obrigatória.</small>
+              }
+              @if (getControl('senha').errors?.['minlength']) {
+                <small>A senha deve ter no mínimo 6 caracteres.</small>
+              }
+            </div>
+          }
         </div>
 
-        <!-- Link "Esqueceu a senha?" -->
-        <div>
-          <a
+        <div class="pt-2"> <a
             href="#"
             class="text-sm font-semibold underline text-[#97C7FF] hover:text-white transition-colors"
             >Esqueceu a senha?</a
           >
         </div>
 
-        <app-botao-primario [name]="'REALIZAR LOGIN'"></app-botao-primario>
+        <div class="pt-4"> <app-botao-primario [name]="'REALIZAR LOGIN'"></app-botao-primario>
+        </div>
 
-        <!-- Separador "ou" -->
         <div
-          class="flex flex-row align-middle items-center justify-center gap-4"
+          class="flex flex-row align-middle items-center justify-center gap-4 pt-2"
         >
           <div class="border w-full border-b-[1.5px] border-white"></div>
           <span class="font-semibold text-sm text-white">ou</span>
@@ -54,7 +74,6 @@
       </form>
     </div>
 
-    <!-- Rodapé com link de registro -->
     <footer class="flex-shrink-0 py-4 text-center">
       <p class="text-xs text-white/80">
         Não tem uma conta?
@@ -62,4 +81,10 @@
       </p>
     </footer>
   </main>
+
+
+
+  </app-plano-de-fundo>
+
+
 </div>

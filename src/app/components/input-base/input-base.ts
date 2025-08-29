@@ -1,10 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
+import { FormControl, ɵInternalFormsSharedModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-input-base',
-  imports: [],
+  imports: [ɵInternalFormsSharedModule, ReactiveFormsModule],
   templateUrl: './input-base.html',
-  styleUrl: './input-base.css',
 })
 export class InputBase {
   @Input() name!: string;
@@ -16,4 +16,6 @@ export class InputBase {
   @Input() placeholder!: string;
 
   @Input() pathIcon!: string;
+
+  @Input() control!: FormControl;
 }

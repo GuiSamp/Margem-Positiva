@@ -1,64 +1,104 @@
-<!-- Contêiner principal que ocupa toda a tela com o gradiente de fundo -->
-<div>
-  <app-plano-de-fundo></app-plano-de-fundo>
-  <!-- Wrapper para o conteúdo principal, garantindo o espaçamento e centralização -->
-  <main class="w-full p-6 max-w-sm mx-auto flex flex-col h-full z-10">
-    <!-- Seção do Formulário -->
-    <div class="flex-grow flex flex-col justify-center">
-      <!-- Textos de boas-vindas -->
+
+  <app-plano-de-fundo>
+     <div class="top-6 inset-x-0 flex justify-center -z-10">
+    <img src="/logo-icon.png" class="w-40 h-40" alt="Logo" />
+  </div>
+    <main class="flex flex-col py-12 bg-[linear-gradient(180deg,rgba(7,40,78,1)_0%,rgba(7,40,78,0.6)_33%,rgba(7,40,78,0.2)_66%,rgba(43,89,142,0)_100%)]  bottom-0 rounded-tr-[100px] w-full h-[80%] -z-10">
+    <div class="flex-grow px-12 flex flex-col justify-center">
+
       <div class="mb-6">
-        <h1 class="text-3xl font-bold text-white">BEM-VINDO</h1>
-        <p class="text-white/80 mt-1">Insira suas informações de acesso!</p>
+        <h1 class="text-3xl font-bold text-white">CRIE SUA CONTA</h1>
+        <p class="text-white/80 mt-1">É rápido e fácil!</p>
       </div>
 
       <!-- Formulário -->
-      <form class="flex flex-col space-y-2">
+      <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()" class="flex flex-col space-y-2">
         <div class="flex flex-col space-y-4">
+
+          <!-- E-MAIL -->
           <app-input-base
             [type]="'string'"
             [id]="'email'"
             [name]="'email'"
             [placeholder]="'E-MAIL'"
             [pathIcon]="'/mail-icon.png'"
+            [control]="getControl('email')"
           ></app-input-base>
+          @if (getControl('email').touched && getControl('email').invalid) {
+            <div class="text-red-500 text-sm -mt-2">
+              @if (getControl('email').errors?.['required']) { <small>O e-mail é obrigatório.</small> }
+              @if (getControl('email').errors?.['email']) { <small>Digite um e-mail válido.</small> }
+            </div>
+          }
+
+          <!-- TELEFONE -->
           <app-input-base
             [type]="'string'"
             [id]="'telefone'"
             [name]="'telefone'"
             [placeholder]="'TELEFONE'"
             [pathIcon]="'/phone-icon.png'"
+            [control]="getControl('telefone')"
           ></app-input-base>
-            <app-input-base
+           @if (getControl('telefone').touched && getControl('telefone').invalid) {
+            <div class="text-red-500 text-sm -mt-2">
+              @if (getControl('telefone').errors?.['required']) { <small>O telefone é obrigatório.</small> }
+            </div>
+          }
+
+          <!-- CPF OU CNPJ -->
+          <app-input-base
             [type]="'string'"
             [id]="'cpf_cnpj'"
             [name]="'cpf_cnpj'"
             [placeholder]="'CPF OU CNPJ'"
             [pathIcon]="'/id-icon.png'"
+            [control]="getControl('cpf_cnpj')"
           ></app-input-base>
-            <app-input-base
-            [type]="'string'"
+          @if (getControl('cpf_cnpj').touched && getControl('cpf_cnpj').invalid) {
+            <div class="text-red-500 text-sm -mt-2">
+              @if (getControl('cpf_cnpj').errors?.['required']) { <small>O CPF ou CNPJ é obrigatório.</small> }
+            </div>
+          }
+
+          <!-- SENHA -->
+          <app-input-base
+            [type]="'password'"
             [id]="'senha'"
             [name]="'senha'"
             [placeholder]="'SENHA'"
             [pathIcon]="'/lock-icon.png'"
+            [control]="getControl('senha')"
           ></app-input-base>
-            <app-input-base
-            [type]="'string'"
+          @if (getControl('senha').touched && getControl('senha').invalid) {
+            <div class="text-red-500 text-sm -mt-2">
+              @if (getControl('senha').errors?.['required']) { <small>A senha é obrigatória.</small> }
+              @if (getControl('senha').errors?.['minlength']) { <small>A senha deve ter no mínimo 6 caracteres.</small> }
+            </div>
+          }
+
+          <!-- REPITA SUA SENHA -->
+          <app-input-base
+            [type]="'password'"
             [id]="'repita_senha'"
             [name]="'repita_senha'"
             [placeholder]="'REPITA SUA SENHA'"
             [pathIcon]="'/lock-icon.png'"
+            [control]="getControl('repita_senha')"
           ></app-input-base>
+          @if (getControl('repita_senha').touched && getControl('repita_senha').invalid) {
+            <div class="text-red-500 text-sm -mt-2">
+              @if (getControl('repita_senha').errors?.['required']) { <small>A confirmação da senha é obrigatória.</small> }
+              @if (getControl('repita_senha').errors?.['mismatch']) { <small>As senhas não conferem.</small> }
+            </div>
+          }
         </div>
 
-       
+        <div class="pt-4">
+          <app-botao-primario [name]="'CADASTRAR E ACESSAR'"></app-botao-primario>
+        </div>
 
-        <app-botao-primario [name]="'CADASTRAR E ACESSAR'"></app-botao-primario>
-
-        <!-- Separador "ou" -->
-        <div
-          class="flex flex-row align-middle items-center justify-center gap-4"
-        >
+        <div class="flex flex-row align-middle items-center justify-center gap-4 pt-2">
           <div class="border w-full border-b-[1.5px] border-white"></div>
           <span class="font-semibold text-sm text-white">ou</span>
           <div class="border w-full border-b-[1.5px] border-white"></div>
@@ -68,12 +108,11 @@
       </form>
     </div>
 
-    <!-- Rodapé com link de registro -->
     <footer class="flex-shrink-0 py-4 text-center">
       <p class="text-xs text-white/80">
-       Já tem uma conta?
+        Já tem uma conta?
         <a href="#" class="font-bold text-white hover:underline">Faça login</a>
       </p>
     </footer>
   </main>
-</div>
+</app-plano-de-fundo>
