@@ -1,1 +1,11 @@
-C:\Users\Gabriel\Desktop\Margem_positiva\backend\src\main\java\br\com\margempositiva\backend\BackendApplication.java
+C:\Users\gabriel\Desktop\Projeto MargemPositiva\Margem-Positiva\backend\src\main\java\br\com\margempositiva\backend\usuario\controller\implementacao\UsuarioControllerImp.java
+C:\Users\gabriel\Desktop\Projeto MargemPositiva\Margem-Positiva\backend\src\main\java\br\com\margempositiva\backend\constants\UsuarioConstants.java
+C:\Users\gabriel\Desktop\Projeto MargemPositiva\Margem-Positiva\backend\src\main\java\br\com\margempositiva\backend\usuario\repository\UsuarioRepository.java
+C:\Users\gabriel\Desktop\Projeto MargemPositiva\Margem-Positiva\backend\src\main\java\br\com\margempositiva\backend\usuario\services\implementacao\UsuarioService.java
+C:\Users\gabriel\Desktop\Projeto MargemPositiva\Margem-Positiva\backend\src\main\java\br\com\margempositiva\backend\usuario\domain\dto\UsuarioDto.java
+C:\Users\gabriel\Desktop\Projeto MargemPositiva\Margem-Positiva\backend\src\main\java\br\com\margempositiva\backend\usuario\controller\UsuarioControllerApi.java
+C:\Users\gabriel\Desktop\Projeto MargemPositiva\Margem-Positiva\backend\src\main\java\br\com\margempositiva\backend\BackendApplication.java
+C:\Users\gabriel\Desktop\Projeto MargemPositiva\Margem-Positiva\backend\src\main\java\br\com\margempositiva\backend\usuario\domain\entity\Usuario.java
+C:\Users\gabriel\Desktop\Projeto MargemPositiva\Margem-Positiva\backend\src\main\java\br\com\margempositiva\backend\usuario\services\UsuarioServiceInterface.java
+C:\Users\gabriel\Desktop\Projeto MargemPositiva\Margem-Positiva\backend\src\main\java\br\com\margempositiva\backend\exceptions\RegraNegocioException.java
+C:\Users\gabriel\Desktop\Projeto MargemPositiva\Margem-Positiva\backend\src\main\java\br\com\margempositiva\backend\usuario\mapper\UsuarioMapper.java

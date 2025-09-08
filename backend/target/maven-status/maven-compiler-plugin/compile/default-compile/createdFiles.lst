@@ -1,1 +1,14 @@
+br\com\margempositiva\backend\usuario\mapper\UsuarioMapper.class
+br\com\margempositiva\backend\usuario\controller\UsuarioControllerApi.class
+br\com\margempositiva\backend\usuario\services\UsuarioServiceInterface.class
+br\com\margempositiva\backend\exceptions\RegraNegocioException.class
+br\com\margempositiva\backend\usuario\controller\implementacao\UsuarioControllerImp.class
 br\com\margempositiva\backend\BackendApplication.class
+br\com\margempositiva\backend\usuario\services\implementacao\UsuarioService.class
+br\com\margempositiva\backend\constants\UsuarioConstants.class
+br\com\margempositiva\backend\usuario\domain\dto\UsuarioDto.class
+br\com\margempositiva\backend\usuario\repository\UsuarioRepository.class
+br\com\margempositiva\backend\usuario\domain\dto\UsuarioDto$UsuarioDtoBuilder.class
+br\com\margempositiva\backend\usuario\mapper\UsuarioMapperImpl.class
+br\com\margempositiva\backend\usuario\domain\entity\Usuario$UsuarioBuilder.class
+br\com\margempositiva\backend\usuario\domain\entity\Usuario.class
