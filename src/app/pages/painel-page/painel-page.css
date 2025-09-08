@@ -1,0 +1,5 @@
+
+main {
+  /* Altura da barra de navegação + padding extra */
+  padding-bottom: calc(5rem + 1.5rem);
+}

@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login-page',
-  standalone: true, // <-- ESSA LINHA É CRÍTICA!
+  standalone: true, 
   imports: [InputBase, BotaoGoogle, BotaoPrimario, PlanoDeFundo, ReactiveFormsModule, CommonModule],
   templateUrl: './login-page.html',
 })
