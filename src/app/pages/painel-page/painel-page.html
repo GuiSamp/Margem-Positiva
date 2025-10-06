@@ -50,41 +50,26 @@
       </div>
     </section>
 
-    <section class="mt-8">
-      <h2 class="text-lg font-bold text-gray-800 mb-3">Acessados recentemente</h2>
-      <div class="grid grid-cols-2 gap-4">
-        <div *ngFor="let item of [1, 2, 3, 4]" class="bg-white rounded-xl shadow overflow-hidden">
-          <img src="./produto.png" alt="Empada de frango" class="w-full h-28 object-cover">
-          <div class="p-3">
-            <h3 class="font-bold text-gray-800 text-base">Empada de frango</h3>
-            <p class="text-xs text-gray-500 mt-1">Custo: <span class="font-semibold text-gray-700">R$ 38,50</span></p>
-            <p class="text-xs text-gray-500">QTE: 25 UN/fornada</p>
-            <p class="text-xs text-gray-500">Lucro: <span class="font-bold text-green-600">R$ 53,50</span></p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+<section class="mt-8">
+  <h2 class="text-lg font-bold text-gray-800 mb-3">Acessados recentemente</h2>
+  <div class="grid grid-cols-2 gap-4">
+    <app-produto-card
+      *ngFor="let produto of produtosRecentes"
+      [imagemUrl]="produto.imagemUrl"
+      [titulo]="produto.titulo"
+      [custo]="produto.custo"
+      [quantidade]="produto.quantidade"
+      [lucro]="produto.lucro">
+    </app-produto-card>
+  </div>
+</section>
+</main>
 
-  <footer class="fixed bottom-0 left-0 right-0 px-6 pb-4 pt-2 z-20">
-    <nav 
-      class="rounded-2xl shadow-lg flex justify-around h-20 items-center text-white bg-cover bg-center"
-      style="background-image: linear-gradient(rgba(7, 40, 78, 0.7), rgba(7, 40, 78, 0.7)), url('/plano-de-fundo.png');">
-      
-      <a href="#" class="flex flex-col items-center space-y-1">
-        <img src="./painel.png" alt="Painel" class="h-7 w-7">
-        <span class="text-xs font-bold">Painel</span>
-      </a>
+<app-barra-navegacao
+  painelIconUrl="./painel.png"
+  cadastrosIconUrl="./cadastro.png"
+  perfilIconUrl="./perfil.png">
+</app-barra-navegacao>
 
-      <a href="#" class="flex flex-col items-center text-white/60 space-y-1">
-        <img src="./cadastro.png" alt="Cadastros" class="h-8 w-8">
-        <span class="text-xs">Cadastros</span>
-      </a>
 
-      <a href="#" class="flex flex-col items-center text-white/60 space-y-1">
-        <img src="./perfil.png" alt="Perfil" class="h-9 w-9">
-        <span class="text-xs">Perfil</span>
-      </a>
-    </nav>
- </footer>
 </app-plano-de-fundo>
