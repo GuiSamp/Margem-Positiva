@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam; // Importado para o filtro
 
 import br.com.margempositiva.backend.usuario.domain.dto.UsuarioDto;
 import jakarta.validation.Valid;
@@ -19,23 +20,18 @@ import java.util.List;
 @RequestMapping(API_USUARIO)
 public interface UsuarioControllerApi {
 
-     @PostMapping
-    UsuarioDto create(@RequestBody @Valid UsuarioDto pessoaDTO);
+    @PostMapping
+    UsuarioDto create(@RequestBody @Valid UsuarioDto usuarioDto);
     
     @PutMapping("/{id}")
-    UsuarioDto update(@PathVariable("id") Long id,
-                            @RequestBody @Valid UsuarioDto pessoaDTO);
+    UsuarioDto update(@PathVariable("id") Long id, @RequestBody @Valid UsuarioDto usuarioDto);
 
     @DeleteMapping("/{id}")
     ResponseEntity<Void> delete(@PathVariable("id") Long id);
 
     @GetMapping
-    List<UsuarioDto> getAll();
+    List<UsuarioDto> getAll(@RequestParam(name = "nome", required = false) String nome);
 
     @GetMapping("/{id}")
     ResponseEntity<UsuarioDto> getById(@PathVariable("id") Long id);
-
-    @GetMapping("/nome/{nome}")
-    public List<UsuarioDto> getAll(@PathVariable("nome") String nome);
-
-} 
+}

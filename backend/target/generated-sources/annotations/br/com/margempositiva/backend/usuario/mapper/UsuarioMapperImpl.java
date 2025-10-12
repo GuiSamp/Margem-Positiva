@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-09-07T22:51:26-0300",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
+    date = "2025-10-11T21:26:42-0300",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.44.0.v20251001-1143, environment: Java 21.0.8 (Eclipse Adoptium)"
 )
 @Component
 public class UsuarioMapperImpl extends UsuarioMapper {
@@ -21,10 +21,10 @@ public class UsuarioMapperImpl extends UsuarioMapper {
 
         UsuarioDto.UsuarioDtoBuilder usuarioDto = UsuarioDto.builder();
 
+        usuarioDto.cpfCnpj( usuario.getCpfCnpj() );
+        usuarioDto.email( usuario.getEmail() );
         usuarioDto.id( usuario.getId() );
         usuarioDto.nome( usuario.getNome() );
-        usuarioDto.email( usuario.getEmail() );
-        usuarioDto.cpfCnpj( usuario.getCpfCnpj() );
         usuarioDto.senha( usuario.getSenha() );
         usuarioDto.telefone( usuario.getTelefone() );
 
@@ -39,10 +39,10 @@ public class UsuarioMapperImpl extends UsuarioMapper {
 
         Usuario.UsuarioBuilder usuario = Usuario.builder();
 
+        usuario.cpfCnpj( usuarioDto.getCpfCnpj() );
+        usuario.email( usuarioDto.getEmail() );
         usuario.id( usuarioDto.getId() );
         usuario.nome( usuarioDto.getNome() );
-        usuario.email( usuarioDto.getEmail() );
-        usuario.cpfCnpj( usuarioDto.getCpfCnpj() );
         usuario.senha( usuarioDto.getSenha() );
         usuario.telefone( usuarioDto.getTelefone() );
 

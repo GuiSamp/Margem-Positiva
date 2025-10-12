@@ -3,10 +3,12 @@ package br.com.margempositiva.backend.usuario.services.implementacao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.springframework.security.crypto.password.PasswordEncoder; 
 import br.com.margempositiva.backend.exceptions.RegraNegocioException;
 import br.com.margempositiva.backend.usuario.domain.dto.UsuarioDto;
 import br.com.margempositiva.backend.usuario.domain.entity.Usuario;
@@ -24,33 +26,35 @@ public class UsuarioService implements UsuarioServiceInterface{
     @Autowired
     private UsuarioMapper usuarioMapper;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
-    public UsuarioDto create(UsuarioDto usuarioDto) {
-        Usuario usuarioNovo = usuarioMapper.UsuarioDtoToUsuario(usuarioDto);
-         Optional<Usuario> usuarioExiste = usuarioRepository.findByCpfCnpj(usuarioNovo.getCpfCnpj()); 
-         if (usuarioExiste.isPresent()) {
+     public UsuarioDto create(UsuarioDto usuarioDto) {
+        Optional<Usuario> usuarioExiste = usuarioRepository.findByCpfCnpj(usuarioDto.getCpfCnpj());
+        if (usuarioExiste.isPresent()) {
             throw new RegraNegocioException("Já existe usuário cadastrado com o cnpj/cpf: " + usuarioDto.getCpfCnpj());
-         }
-        usuarioRepository.save(usuarioNovo); 
+        }
+
+        Usuario usuarioNovo = usuarioMapper.UsuarioDtoToUsuario(usuarioDto);
+        usuarioNovo.setSenha(passwordEncoder.encode(usuarioDto.getSenha()));
+
+        usuarioRepository.save(usuarioNovo);
         return usuarioMapper.usuarioToUsuarioDto(usuarioNovo);
     }
 
     @Override
     public List<UsuarioDto> findAll() {
-        List<Usuario> usuarios = usuarioRepository.findAll();
-        List<UsuarioDto> usuariosDtos = new ArrayList<>();
-
-        usuarios.forEach(p-> usuariosDtos.add(usuarioMapper.usuarioToUsuarioDto(p)));
-        return usuariosDtos;
+        return usuarioRepository.findAll()
+                .stream()
+                .map(usuarioMapper::usuarioToUsuarioDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     public UsuarioDto findById(Long id) {
-        Optional<Usuario> usuario = usuarioRepository.findById(id);
-        if (!usuario.isPresent()) {
-            throw new RegraNegocioException("Usuário não encontrado!"); 
-        }
-        return usuarioMapper.usuarioToUsuarioDto(usuario.get());
+        return usuarioRepository.findById(id)
+                .map(usuarioMapper::usuarioToUsuarioDto)
+                .orElseThrow(() -> new RegraNegocioException("Usuário não encontrado!"));
     }
 
     @Override

@@ -1,5 +1,12 @@
 package br.com.margempositiva.backend.usuario.domain.entity;
 
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,15 +20,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Builder
 @Table(name = "usuario")
-public class Usuario {
+public class Usuario implements UserDetails { // <-- IMPLEMENTE UserDetails
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +44,6 @@ public class Usuario {
     @NotEmpty(message = "O campo 'cpf/cnpj' não pode estar vazio.")
     private String cpfCnpj;
  
-    
     @Column(name = "senha")
     @NotEmpty(message = "Senha não pode estar vazia")
     private String senha;
@@ -48,6 +52,40 @@ public class Usuario {
     @NotEmpty(message = "O campo 'telefone' não pode estar vazio.")
     private String telefone;
 
+    
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
 
+    @Override
+    public String getPassword() {
+        return this.senha;
+    }
 
+    @Override
+    public String getUsername() {
+        // Usaremos o email como "username" para o login
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
