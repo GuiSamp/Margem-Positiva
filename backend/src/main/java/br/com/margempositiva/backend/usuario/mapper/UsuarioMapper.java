@@ -1,7 +1,7 @@
 package br.com.margempositiva.backend.usuario.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping; // Importe a anotação @Mapping
+import org.mapstruct.Mapping; 
 
 import br.com.margempositiva.backend.usuario.domain.dto.UsuarioCreateRequestDto;
 import br.com.margempositiva.backend.usuario.domain.dto.UsuarioDto;

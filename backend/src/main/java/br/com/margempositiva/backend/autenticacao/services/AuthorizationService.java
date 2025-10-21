@@ -16,8 +16,7 @@ public class AuthorizationService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // O Spring Security chama este método ao tentar autenticar.
-        // Ele busca o usuário pelo email (que estamos tratando como 'username').
+     
         return usuarioRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado com o email: " + username));
     }

@@ -41,7 +41,7 @@ public class SecurityFilter extends OncePerRequestFilter {
                     System.out.println(">>>> [SECURITY FILTER] Usuário encontrado no banco: " + user.getUsername());
                     var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
                     
-                    // A LINHA MAIS IMPORTANTE! COLOCA O USUÁRIO NA SESSÃO ATUAL
+                   
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                     System.out.println(">>>> [SECURITY FILTER] Usuário autenticado e colocado no Contexto de Segurança.");
                 } else {
@@ -57,7 +57,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         System.out.println(">>>> [SECURITY FILTER] Encaminhando requisição para o próximo filtro...");
         System.out.println("==============================================");
         
-        // Continua o fluxo da requisição
+    
         filterChain.doFilter(request, response);
     }
 

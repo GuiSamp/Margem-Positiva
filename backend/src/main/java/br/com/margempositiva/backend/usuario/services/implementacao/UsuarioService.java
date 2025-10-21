@@ -35,7 +35,7 @@ public class UsuarioService {
 
         Usuario usuarioNovo = usuarioMapper.usuarioCreateRequestToUsuario(usuarioCreateDto);
         usuarioNovo.setSenha(passwordEncoder.encode(usuarioCreateDto.getSenha()));
-        usuarioNovo.setRole(UserRole.USER); // Define USER como role padrão
+        usuarioNovo.setRole(UserRole.USER); 
 
         Usuario usuarioSalvo = usuarioRepository.save(usuarioNovo);
         return usuarioMapper.usuarioToUsuarioDto(usuarioSalvo);
