@@ -1,83 +1,82 @@
 package br.com.margempositiva.backend.usuario.services.implementacao;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.margempositiva.backend.exceptions.RegraNegocioException;
+import br.com.margempositiva.backend.usuario.domain.dto.UsuarioCreateRequestDto;
 import br.com.margempositiva.backend.usuario.domain.dto.UsuarioDto;
+import br.com.margempositiva.backend.usuario.domain.dto.UsuarioUpdateRequestDto;
+import br.com.margempositiva.backend.usuario.domain.entity.UserRole;
 import br.com.margempositiva.backend.usuario.domain.entity.Usuario;
 import br.com.margempositiva.backend.usuario.mapper.UsuarioMapper;
 import br.com.margempositiva.backend.usuario.repository.UsuarioRepository;
-import br.com.margempositiva.backend.usuario.services.UsuarioServiceInterface;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class UsuarioService implements UsuarioServiceInterface{
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+public class UsuarioService {
 
-    @Autowired
-    private UsuarioMapper usuarioMapper;
+    private final UsuarioRepository usuarioRepository;
+    private final UsuarioMapper usuarioMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    @Override
-    public UsuarioDto create(UsuarioDto usuarioDto) {
-        Usuario usuarioNovo = usuarioMapper.UsuarioDtoToUsuario(usuarioDto);
-         Optional<Usuario> usuarioExiste = usuarioRepository.findByCpfCnpj(usuarioNovo.getCpfCnpj()); 
-         if (usuarioExiste.isPresent()) {
-            throw new RegraNegocioException("Já existe usuário cadastrado com o cnpj/cpf: " + usuarioDto.getCpfCnpj());
-         }
-        usuarioRepository.save(usuarioNovo); 
-        return usuarioMapper.usuarioToUsuarioDto(usuarioNovo);
+    public UsuarioDto create(UsuarioCreateRequestDto usuarioCreateDto) {
+        usuarioRepository.findByCpfCnpj(usuarioCreateDto.getCpfCnpj()).ifPresent(u -> {
+            throw new RegraNegocioException("Já existe usuário cadastrado com o cnpj/cpf: " + u.getCpfCnpj());
+        });
+
+        usuarioRepository.findByEmail(usuarioCreateDto.getEmail()).ifPresent(u -> {
+            throw new RegraNegocioException("Já existe usuário cadastrado com o e-mail: " + u.getEmail());
+        });
+
+        Usuario usuarioNovo = usuarioMapper.usuarioCreateRequestToUsuario(usuarioCreateDto);
+        usuarioNovo.setSenha(passwordEncoder.encode(usuarioCreateDto.getSenha()));
+        usuarioNovo.setRole(UserRole.USER); // Define USER como role padrão
+
+        Usuario usuarioSalvo = usuarioRepository.save(usuarioNovo);
+        return usuarioMapper.usuarioToUsuarioDto(usuarioSalvo);
     }
 
-    @Override
-    public List<UsuarioDto> findAll() {
-        List<Usuario> usuarios = usuarioRepository.findAll();
-        List<UsuarioDto> usuariosDtos = new ArrayList<>();
+    public UsuarioDto update(Long id, UsuarioUpdateRequestDto usuarioUpdateDto) {
+        Usuario usuarioExistente = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RegraNegocioException("Usuário não encontrado com id " + id));
 
-        usuarios.forEach(p-> usuariosDtos.add(usuarioMapper.usuarioToUsuarioDto(p)));
-        return usuariosDtos;
+        usuarioExistente.setNome(usuarioUpdateDto.getNome());
+        usuarioExistente.setTelefone(usuarioUpdateDto.getTelefone());
+
+        Usuario usuarioAtualizado = usuarioRepository.save(usuarioExistente);
+
+        return usuarioMapper.usuarioToUsuarioDto(usuarioAtualizado);
     }
 
-    @Override
-    public UsuarioDto findById(Long id) {
-        Optional<Usuario> usuario = usuarioRepository.findById(id);
-        if (!usuario.isPresent()) {
-            throw new RegraNegocioException("Usuário não encontrado!"); 
-        }
-        return usuarioMapper.usuarioToUsuarioDto(usuario.get());
-    }
-
-    @Override
-    public List<UsuarioDto> findByNome(String nome) {
-        List<Usuario> usuarios = usuarioRepository.findByNome(nome);
-        List<UsuarioDto> usuarioDtos = new ArrayList<>();
-      
-        usuarios.forEach(p-> usuarioDtos.add(usuarioMapper.usuarioToUsuarioDto(p)));
-
-        return usuarioDtos;
-    }
-
-    @Override
     public void remove(Long id) {
         if (!usuarioRepository.existsById(id)) {
-            throw new RegraNegocioException("Usuário não encontrada com id " + id);
+            throw new RegraNegocioException("Usuário não encontrado com id " + id);
         }
-        usuarioRepository.deleteById(id);     
+        usuarioRepository.deleteById(id);
     }
 
-    @Override
-    public UsuarioDto update(UsuarioDto p) {
-        if (!usuarioRepository.existsById(p.getId())) {
-            throw new RegraNegocioException("Usuário não encontrada com id " + p.getId());
-        }
-        return create(p);
+    public List<UsuarioDto> findAll() {
+        return usuarioRepository.findAll()
+                .stream()
+                .map(usuarioMapper::usuarioToUsuarioDto)
+                .collect(Collectors.toList());
     }
-    
-    
+
+    public UsuarioDto findById(Long id) {
+        return usuarioRepository.findById(id)
+                .map(usuarioMapper::usuarioToUsuarioDto)
+                .orElseThrow(() -> new RegraNegocioException("Usuário não encontrado!"));
+    }
+
+    public List<UsuarioDto> findByNome(String nome) {
+        return usuarioRepository.findByNome(nome)
+                .stream()
+                .map(usuarioMapper::usuarioToUsuarioDto)
+                .collect(Collectors.toList());
+    }
 }

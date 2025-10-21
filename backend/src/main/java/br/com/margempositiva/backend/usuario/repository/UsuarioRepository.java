@@ -7,21 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.margempositiva.backend.usuario.domain.entity.Usuario;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
-    @Override
-    default List<Usuario> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
-    }
-
-    @Override
-    default Optional<Usuario> findById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
-    }
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     List<Usuario> findByNome(String nome);
 
     Optional<Usuario> findByCpfCnpj(String cpfCnpj);
-    
+
+    Optional<Usuario> findByEmail(String email);
 }

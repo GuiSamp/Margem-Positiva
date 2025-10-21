@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import br.com.margempositiva.backend.usuario.domain.dto.UsuarioCreateRequestDto;
 import br.com.margempositiva.backend.usuario.domain.dto.UsuarioDto;
+import br.com.margempositiva.backend.usuario.domain.dto.UsuarioUpdateRequestDto;
 import jakarta.validation.Valid;
 
 import static br.com.margempositiva.backend.constants.UsuarioConstants.API_USUARIO;
@@ -19,23 +22,18 @@ import java.util.List;
 @RequestMapping(API_USUARIO)
 public interface UsuarioControllerApi {
 
-     @PostMapping
-    UsuarioDto create(@RequestBody @Valid UsuarioDto pessoaDTO);
-    
+    @PostMapping
+    UsuarioDto create(@RequestBody @Valid UsuarioCreateRequestDto usuarioCreateDto);
+
     @PutMapping("/{id}")
-    UsuarioDto update(@PathVariable("id") Long id,
-                            @RequestBody @Valid UsuarioDto pessoaDTO);
+    UsuarioDto update(@PathVariable("id") Long id, @RequestBody @Valid UsuarioUpdateRequestDto usuarioUpdateDto);
 
     @DeleteMapping("/{id}")
     ResponseEntity<Void> delete(@PathVariable("id") Long id);
 
     @GetMapping
-    List<UsuarioDto> getAll();
+    List<UsuarioDto> getAll(@RequestParam(name = "nome", required = false) String nome);
 
     @GetMapping("/{id}")
     ResponseEntity<UsuarioDto> getById(@PathVariable("id") Long id);
-
-    @GetMapping("/nome/{nome}")
-    public List<UsuarioDto> getAll(@PathVariable("nome") String nome);
-
-} 
+}
