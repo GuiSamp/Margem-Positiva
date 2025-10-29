@@ -2,9 +2,12 @@ package br.com.margempositiva.backend.produto.entity;
 
 import br.com.margempositiva.backend.categoria.entity.Categoria;
 import br.com.margempositiva.backend.empresa.entity.Empresa;
+import br.com.margempositiva.backend.receitaproduto.entity.ReceitaProduto;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Produto")
@@ -19,6 +22,9 @@ public class Produto {
     @Column(name = "custofinal", precision = 12, scale = 2)
     private BigDecimal custoFinal;
 
+    @Column(name = "margemlucro", precision = 5, scale = 2)
+    private BigDecimal margemLucro;
+
     @Column(name = "datafabricacao")
     private LocalDate dataFabricacao;
 
@@ -32,4 +38,7 @@ public class Produto {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoriaid")
     private Categoria categoria;
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ReceitaProduto> receita = new HashSet<>();
 }
