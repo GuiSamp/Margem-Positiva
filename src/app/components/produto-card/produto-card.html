@@ -1,0 +1,9 @@
+<div class="bg-white rounded-xl shadow overflow-hidden">
+  <img [src]="imagemUrl" [alt]="titulo" class="w-full h-28 object-cover">
+  <div class="p-3">
+    <h3 class="font-bold text-gray-800 text-base">{{ titulo }}</h3>
+    <p class="text-xs text-gray-500 mt-1">Custo: <span class="font-semibold text-gray-700">R$ {{ custo.toFixed(2) }}</span></p>
+    <p class="text-xs text-gray-500">QTE: {{ quantidade }}</p>
+    <p class="text-xs text-gray-500">Lucro: <span class="font-bold text-green-600">R$ {{ lucro.toFixed(2) }}</span></p>
+  </div>
+</div>
