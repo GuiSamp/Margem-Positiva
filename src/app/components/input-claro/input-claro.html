@@ -1,7 +1,14 @@
-<input 
-  [type]="type"
-  [id]="id"
-  [placeholder]="placeholder"
-  [formControl]="control"
-  class="w-full px-4 py-3 bg-gray-100 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
->
+<div>
+  <label 
+    [for]="id" 
+    class="block mb-2 text-sm font-medium text-gray-900"
+  >
+    {{ label }}
+  </label>
+  <input 
+    [type]="type"
+    [id]="id"
+    [formControl]="control"
+    class="w-full px-4 py-3 bg-[#EEEEEE] rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  >
+</div>

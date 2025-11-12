@@ -1,7 +1,7 @@
 <app-plano-de-fundo>
   <app-header-pagina logoUrl="/logo-icon.png"></app-header-pagina>
 
-  <main class="flex-grow bg-[#F0F2F5] rounded-tl-[40px] -mt-10 pt-8 px-6 pb-32 z-10 overflow-y-auto">
+  <main class="flex-grow bg-[#F0F2F5] rounded-tl-[40px] mt-0 pt-8 px-6 pb-32 z-10 overflow-y-auto">
     
     <div class="flex items-center mb-6">
       <button class="mr-4 text-[#07284E]">
@@ -16,38 +16,40 @@
       
       <section class="mb-8">
         <div class="flex items-center gap-2 mb-4">
-          <img src="/assets/info-icon.png" alt="Info" class="h-5 w-5"> <h2 class="text-lg font-semibold text-gray-700">Insira as informações básicas</h2>
+          <img src="info-icon.png" alt="Info" class="h-5 w-5"> <h2 class="text-lg font-semibold text-gray-700">Insira as informações básicas</h2>
         </div>
         
         <div class="space-y-4">
-          <app-input-claro placeholder="Campo 1" id="campo1" [control]="getControl('campo1')"></app-input-claro>
+          <app-input-claro [label]="'Campo 1'" id="campo1" [control]="getControl('campo1')"></app-input-claro>
           
-          <div class="grid grid-cols-2 gap-4">
-            <app-input-claro placeholder="Campo 2" id="campo2" [control]="getControl('campo2')"></app-input-claro>
-            <app-input-claro placeholder="Campo 3" id="campo3" [control]="getControl('campo3')"></app-input-claro>
+          <div class="grid grid-cols-2 gap-4 mt-2">
+            <app-input-claro [label]="'Campo 2'" id="campo2" [control]="getControl('campo2')"></app-input-claro>
+            <app-input-claro [label]="'Campo 3'" id="campo3" [control]="getControl('campo3')"></app-input-claro>
           </div>
           
-          <app-input-claro placeholder="Campo 4" id="campo4" [control]="getControl('campo4')"></app-input-claro>
+          <app-input-claro [label]="'Campo 4'" id="campo4" [control]="getControl('campo4')"></app-input-claro>
 
-          <div class="grid grid-cols-2 gap-4">
-            <app-input-claro placeholder="Campo 5" id="campo5" [control]="getControl('campo5')"></app-input-claro>
-            <app-input-claro placeholder="Campo 6" id="campo6" [control]="getControl('campo6')"></app-input-claro>
+          <div class="grid grid-cols-2 gap-4 mt-2">
+            <app-input-claro [label]="'Campo 5'" id="campo5" [control]="getControl('campo5')"></app-input-claro>
+            <app-input-claro [label]="'Campo 6'" id="campo6" [control]="getControl('campo6')"></app-input-claro>
           </div>
 
-          <app-input-claro placeholder="Campo 7" id="campo7" [control]="getControl('campo7')"></app-input-claro>
+          <app-input-claro [label]="'Campo 7'" id="campo7" [control]="getControl('campo7')"></app-input-claro>
 
-          <textarea 
-            id="campo8"
-            placeholder="Campo 8" 
-            [formControl]="getControl('campo8')"
-            class="w-full h-24 px-4 py-3 bg-gray-100 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          ></textarea>
+          <div class="mt-2">
+            <label for="Campo 8" class="text-sm font-medium text-gray-900">Campo 8</label>
+            <textarea
+              id="campo8" 
+              [formControl]="getControl('campo8')"
+              class="w-full h-24 px-4 py-3 bg-[#EEEEEE] rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            ></textarea>
+          </div>
         </div>
       </section>
 
       <section>
         <div class="flex items-center gap-2 mb-4">
-          <img src="/assets/list-icon.png" alt="Lista" class="h-5 w-5"> <h2 class="text-lg font-semibold text-gray-700">Preencha a lista de materiais</h2>
+          <img src="list-icon.png" alt="Lista" class="h-5 w-5"> <h2 class="text-lg font-semibold text-gray-700">Preencha a lista de materiais</h2>
         </div>
 
         <div class="space-y-3">
@@ -55,21 +57,21 @@
             <app-material-card [nome]="mat.nome" [quantidade]="mat.quantidade"></app-material-card>
           }
 
-          <button type="button" class="w-full py-3 border-2 border-dashed border-blue-500 rounded-lg text-blue-500 font-bold flex items-center justify-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
-            </svg>
+          <button type="button" class="w-full py-3 border-2 border-dashed border-blue-500 rounded-lg text-blue-500 font-bold flex items-center justify-center gap-3">
+            <img src=".\mais.png" alt="Adicionar" class="h-5 w-5">
             Adicionar Material
           </button>
         </div>
       </section>
 
     </form>
-  </main>
 
-  <footer class="fixed bottom-0 left-0 right-0 p-4 bg-white shadow-[0_-4px_10px_rgba(0,0,0,0.05)] z-20">
+  <div class="mt-2">
     <app-botao-primario 
       [name]="'CADASTRAR'" 
-      [iconUrl]="'/seta.png'"> </app-botao-primario>
-  </footer>
+      [iconUrl]="'/seta.png'">
+    </app-botao-primario>
+  </div>
+  </main>
+
 </app-plano-de-fundo>

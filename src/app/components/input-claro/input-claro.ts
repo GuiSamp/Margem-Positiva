@@ -9,8 +9,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './input-claro.html',
 })
 export class InputClaro {
+  @Input() label: string = '';
   @Input() control!: FormControl;
-  @Input() placeholder: string = '';
   @Input() id: string = '';
   @Input() type: string = 'text';
 }
