@@ -1,0 +1,41 @@
+<div class="bg-white rounded-4xl shadow-md overflow-hidden border border-gray-200">
+  <div class="flex p-4 gap-4">
+    
+    <img [src]="imagemUrl" alt="Imagem do Produto" class="w-24 h-24 object-cover rounded-lg flex-shrink-0">
+    
+    <div class="flex-grow">
+      <span class="text-xs text-gray-500 uppercase">{{ categoria }}</span>
+      <h3 class="text-lg font-bold text-[#07284E] leading-tight">{{ nome }}</h3>
+      
+      <div class="mt-2">
+        <p class="text-xs text-gray-500">lucro por remessa</p>
+        <p class="text-lg font-bold text-blue-600">R$ {{ lucro }}</p>
+      </div>
+      
+      <div class="mt-1">
+        <p class="text-xs text-gray-500">custo por remessa</p>
+        <p class="text-lg font-bold text-blue-600">R$ {{ custo }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex border-t border-gray-200">
+    
+    <button (click)="editar()" class="flex-1 py-3 text-center text-blue-600 font-semibold flex items-center justify-center gap-2 hover:bg-blue-50 transition-colors">
+      Editar
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.536L16.732 3.732z" />
+      </svg>
+    </button>
+    
+    <div class="border-l border-gray-200"></div>
+    
+    <button (click)="excluir()" class="flex-1 py-3 text-center text-red-600 font-semibold flex items-center justify-center gap-2 hover:bg-red-50 transition-colors">
+      Excluir
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+      </svg>
+    </button>
+  </div>
+
+</div>
